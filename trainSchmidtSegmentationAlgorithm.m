@@ -25,12 +25,12 @@
 % S. E. Schmidt et al., "Segmentation of heart sound recordings by a 
 % duration-dependent hidden Markov model," Physiol. Meas., vol. 31,
 % no. 4, pp. 513-29, Apr. 2010.
-%
+% 
 % Developed by David Springer for comparison purposes in the paper:
 % D. Springer et al., ?Logistic Regression-HSMM-based Heart Sound 
 % Segmentation,? IEEE Trans. Biomed. Eng., In Press, 2015.
-%
-%% Copyright (C) 2016  David Springer
+% 
+% % Copyright (C) 2016  David Springer
 % dave.springer@gmail.com
 % 
 % This program is free software: you can redistribute it and/or modify
