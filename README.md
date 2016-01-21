@@ -1,5 +1,5 @@
 # Schmidt-Segmentation-Code
-Matlab code for the Schmidt HMM-based heart sound segmentation
+Matlab code for the Schmidt HMM-based heart sound segmentation. An example of the implementation of this code can be found in “run_Example_Schmidt_Script.m”.
 
 This code is derived from the paper:
 S. E. Schmidt et al., "Segmentation of heart sound recordings by a 
@@ -7,8 +7,8 @@ duration-dependent hidden Markov model," Physiol. Meas., vol. 31,
 no. 4, pp. 513-29, Apr. 2010.
 
 Developed by David Springer for comparison purposes in the paper:
-D. Springer et al., ?Logistic Regression-HSMM-based Heart Sound 
-Segmentation,? IEEE Trans. Biomed. Eng., In Press, 2015.
+D. Springer et al., “Logistic Regression-HSMM-based Heart Sound 
+Segmentation,” IEEE Trans. Biomed. Eng., In Press, 2015.
 
 % Copyright (C) 2016  David Springer
 dave.springer@gmail.com
