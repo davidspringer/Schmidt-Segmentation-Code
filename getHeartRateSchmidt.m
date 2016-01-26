@@ -64,9 +64,11 @@ homomorphic_envelope = Homomorphic_Envelope_with_Hilbert(audio_data, Fs);
 
 signal_autocorrelation = autocorr(homomorphic_envelope,length(homomorphic_envelope)-1, [] , 2);
 
+%% Set the max and min search indices
+% This sets the search for the highest peak in the autocorrelation to be
+% between 120 (0.5*Fs) and 30 (2*Fs) BPM
 min_index = 0.5*Fs;
 max_index = 2*Fs;
-
 
 [~, index] = max(signal_autocorrelation(min_index:max_index));
 true_index = index+min_index-1;

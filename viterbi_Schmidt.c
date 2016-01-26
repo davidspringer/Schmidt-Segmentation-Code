@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
     
-    
+#include <string.h>    
 #include "mex.h"
 #include <limits.h>
 #include <float.h>
@@ -90,29 +90,17 @@ void viterbi(
                 /*
                  *
                  *
-                 * //The start of the analysis window, which is the current time
-                 * //step, minus d, the time horizon we are currently looking back,
-                 * //plus 1. The analysis window can be seen to be starting one
-                 * //step back each time the variable d is increased*/
+                 * The start of the analysis window, which is the current time
+                 * step, minus d, the time horizon we are currently looking back,
+                 * plus 1. The analysis window can be seen to be starting one
+                 * step back each time the variable d is increased*/
                 start = t - d;
                 
                 
                 if(start>-1){
                     
                     
-//                     if(t<5){
-//                         
-//                         mexPrintf ("t:%d \n",t);
-//                         
-//                         mexPrintf ("d:%d \n",d);
-//                         
-//                         mexPrintf ("t-(d) +1*T:%d \n",t-(d) +1*T);
-//                         mexPrintf ("delta(t-d):%f \n",delta[t-(d) +0*T] );
-//                         mexPrintf ("delta(t-d):%f \n",delta[t-(d) +1*T] );
-//                         
-//                     }
-                    
-                    
+                  
                     
                     for(i = 0; i<N; i++)
                     {
@@ -129,12 +117,12 @@ void viterbi(
                     
                     
                     
-                    /*//Find the normaliser for the observations at the start of the
-                     * //analysis window. The probability of seeing all the
-                     * //observations in the analysis window in state j is updated each
-                     * //time d is incrememented two lines below, so we only need to
-                     * //find the observation probabilities for one time step, each
-                     * //time d is updated:*/
+                    /*Find the normaliser for the observations at the start of the
+                     * analysis window. The probability of seeing all the
+                     * observations in the analysis window in state j is updated each
+                     * time d is incrememented two lines below, so we only need to
+                     * find the observation probabilities for one time step, each
+                     * time d is updated:*/
                     
                     for(i = 0; i<N; i++)
                     {
@@ -150,31 +138,20 @@ void viterbi(
                     }
                     
                     
-//                     
-//                     if(t<5){
-//                         mexPrintf ("probs:%f \n",probs);
-//                         
-//                     }
+                   
                     
-                    
-                    /*                 mexPrintf ("probs: %f \n",probs);
-                     * //Keep a running total of the emmission probabilities as the
-                     * //start point of the time window is moved back one step at a
-                     * //time. This is the probability of seeing all the observations
-                     * //in the analysis window in state j:
+                    /* 
+                     * Keep a running total of the emmission probabilities as the
+                     * start point of the time window is moved back one step at a
+                     * time. This is the probability of seeing all the observations
+                     * in the analysis window in state j:
                      *
-                     * //Within this line is (observation_probs[start+j*T])/normaliser, which finds
-                     * //the normalised probabilities of the observations at only
-                     * //the time point at the start of the time window:*/
+                     * Within this line is (observation_probs[start+j*T])/normaliser, which finds
+                     * the normalised probabilities of the observations at only
+                     * the time point at the start of the time window:*/
                     emission_probs = emission_probs+log(probs);
                     
-                    
-//                     if(t<5){
-//                         mexPrintf ("emission_probs:%f \n",emission_probs);
-//                     }
-                    
-                    
-                    
+                                        
                     /*Find the normaliser for the duration probablities, being the sum across all allowed times in each state:*/
                     for(i = 0; i<max_duration_D; i++)
                     {
@@ -191,25 +168,12 @@ void viterbi(
                     
                     
                     /*Find the total probability of transitioning from the last
-                     * //state to this one, with the observations and being in the same
-                     * //state for the analysis window. This is the duration-dependant
-                     * //variation of equation 33a from Rabiner:*/
+                     * state to this one, with the observations and being in the same
+                     * state for the analysis window. This is the duration-dependant
+                     * variation of equation 33a from Rabiner:*/
                     delta_temp = max_delta + (emission_probs)+ (log((duration_probs[j][d]/duration_sum)));
                     
-                    
-//                     if(t<5){
-//                         mexPrintf ("max_delta: %f \n",max_delta);
-//                         
-//                         mexPrintf ("emission_probs: %f \n",emission_probs);
-//                         mexPrintf ("duration_probs[j][d]: %f \n",duration_probs[j][d]);
-//                         mexPrintf ("duration_sum: %f \n",duration_sum);
-//                         
-//                         mexPrintf ("log((duration_probs[j][d]/duration_sum)): %f \n",log((duration_probs[j][d]/duration_sum)));
-//                         
-//                         mexPrintf ("delta_temp: %f \n",delta_temp);
-//                         
-//                     }
-                    
+                   
                     
                     
                     /*
@@ -222,11 +186,6 @@ void viterbi(
                      */
                     
                     
-                    
-                    
-//                     mexPrintf ("delta_temp: %f \n",delta_temp);
-//                     
-//                     mexPrintf ("delta_temp>delta?: %d \n",delta_temp>delta[t+j*T]);
                     
                     if(delta_temp>delta[t+j*T]){
                         
@@ -337,15 +296,7 @@ void mexFunction(
     observation_probs_matrix = mxGetPr(observation_probs);
     psi_matrix = mxGetPr(psi);
     
-    /*     for (col=0; col < mxGetN(delta); col++){
-     * //         for (row=0; row < mxGetM(delta); row++){
-     * //
-     * //
-     * //             observation_probs_matrix[row][col] =(mxGetPr(observation_probs))[row+col*mxGetM(observation_probs)];
-     * //             psi_matrix[row][col] =(mxGetPr(psi))[row+col*mxGetM(psi)];
-     * //         }
-     * //     }*/
-    
+   
     
     for (col=0; col < mxGetN(duration_probs); col++){
         for (row=0; row < mxGetM(duration_probs); row++){
