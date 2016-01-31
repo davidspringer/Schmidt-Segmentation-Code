@@ -68,7 +68,6 @@ if(figures)
    plot(t1,assigned_states,'r--');
    legend('Audio data', 'Derived states');
    disp('Press a key to continue');
-   pause();
 end
 
 

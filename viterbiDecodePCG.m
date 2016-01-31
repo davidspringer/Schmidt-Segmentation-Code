@@ -60,7 +60,7 @@ N = 4; % Number of states
 
 % Setting the maximum duration of a single state. This is set to an entire
 % heart cycle:
-max_duration_D = round((1*heartrate/60)*Fs);
+max_duration_D = round((1*(60/heartrate))*Fs);
 
 % Initialising the variables that are needed to find the optimal state path along
 % the observation sequence.
@@ -106,7 +106,7 @@ for state_j = 1:N
             
             %TODO Justify minimum length
             if(d < min_S1 || d > max_S1)
-                duration_probs(state_j,d)= 0;
+                duration_probs(state_j,d)= realmin;
             end
             
             
@@ -115,7 +115,7 @@ for state_j = 1:N
             
             %TODO Justify minimum length
             if(d < min_S2 || d > max_S2)
-                duration_probs(state_j,d)= 0;
+                duration_probs(state_j,d)= realmin;
             end
             
             
@@ -125,7 +125,7 @@ for state_j = 1:N
             
             %TODO Justify minimum length
             if(d < min_systole|| d > max_systole)
-                duration_probs(state_j,d)= 0;
+                duration_probs(state_j,d)= realmin;
             end
             
             
@@ -135,7 +135,7 @@ for state_j = 1:N
             
             %TODO Justify minimum length
             if(d < min_diastole ||d > max_diastole)
-                duration_probs(state_j,d)= 0;
+                duration_probs(state_j,d)= realmin;
             end
         end
     end
